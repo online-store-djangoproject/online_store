@@ -13,7 +13,7 @@ from products.filters import ProductFilter
 
 
 class ProductsViewSet(ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(is_available=True, inventory__gt=0)
     serializer_class = ProductSerializer
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]

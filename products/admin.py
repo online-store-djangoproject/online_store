@@ -1,25 +1,25 @@
 from django.contrib import admin
-from .models import *
-# Register your models here.
+from .models import Category, Product, Review
 
+
+@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    model = Product
-    list_display = ['id','name','discount','price','category']
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ["id", "name", "price", "inventory", "is_available", "category", "discount", "top_deal", "flash_sales"]
+    list_filter = ["category", "is_available", "discount", "top_deal", "flash_sales"]
+    list_editable = ["price", "inventory", "is_available"]
+    search_fields = ["name", "description", "slug"]
+    prepopulated_fields = {"slug": ("name",)}
+    autocomplete_fields = ["category"]
 
-admin.site.register(Product, ProductAdmin)
 
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    model = Category
-    list_display = ['category_id','title']
-    prepopulated_fields = {'slug': ('title',)}
+    list_display = ["category_id", "title", "slug"]
+    search_fields = ["title", "slug"]
+    prepopulated_fields = {"slug": ("title",)}
 
-admin.site.register(Category, CategoryAdmin)
-''
+
+@admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    model = Review
-    list_display = ['product','date_created','description','name']
-
-admin.site.register(Review, ReviewAdmin)
-
-# Register your models here.
+    list_display = ["product", "date_created", "name"]
+    search_fields = ["product__name", "name", "description"]

@@ -29,12 +29,13 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     discount = models.BooleanField(default=False)
     image = models.ImageField(upload_to='img/product/', blank=True, null=True, default='default.jpg')
-    price = models.FloatField(default=100.00)
+    price = models.DecimalField(max_digits=12, decimal_places=2, default=100.00)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='products')
     slug = models.SlugField(default=None)
     inventory = models.IntegerField(default=5)
     top_deal = models.BooleanField(default=False)
     flash_sales = models.BooleanField(default=False)
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

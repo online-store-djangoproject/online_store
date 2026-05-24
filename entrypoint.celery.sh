@@ -1,8 +1,5 @@
 #!/bin/bash
-
 set -e
 
-echo "📡 Starting Celery worker..."
-
-# اجرای celery
+echo "Starting Celery worker..."
 exec celery -A src worker --loglevel=info
