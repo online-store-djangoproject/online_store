@@ -1,0 +1,8 @@
+#[worker.oci]
+#  network = "host"
+#
+#[worker.oci.proxy]
+#  httpProxy  = "http://172.17.0.1:10808"
+#  httpsProxy = "http://172.17.0.1:10808"
+#  noProxy    = ["localhost","127.0.0.1","::1","172.17.0.1"]
+#
